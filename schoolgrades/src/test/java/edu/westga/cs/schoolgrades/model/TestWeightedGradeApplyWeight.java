@@ -33,6 +33,7 @@ class TestWeightedGradeApplyWeight {
 		assertEquals(testWeightedGrade.getValue(), 84);
 	}
 
+
 	@Test
 	public void shouldNotChangeSimpleGrade() {
 		WeightedGrade testWeightedGrade = new WeightedGrade(testGrade);
@@ -81,4 +82,5 @@ class TestWeightedGradeApplyWeight {
 		assertEquals(testCompositeGrade.getValue(), 72.67);
 
 	}
+
 }

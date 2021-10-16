@@ -8,11 +8,12 @@ public class WeightedGrade extends GradeDecorator {
 	}
 
 	private double applyWeight() {
-		return (super.getValue() + 0.5);
+		return super.getValue() * 0.05;
+		
 	}
 
 	@Override
 	public double getValue() {
-		return super.getValue() + this.applyWeight();
+		return (this.applyWeight() + super.getValue());
 	}
 }
