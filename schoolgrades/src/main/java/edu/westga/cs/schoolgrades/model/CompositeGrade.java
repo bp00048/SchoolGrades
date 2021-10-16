@@ -7,10 +7,28 @@ import java.util.ArrayList;
  *
  */
 public class CompositeGrade implements Grade {
-	ArrayList<SimpleGrade> gradeList = new ArrayList<SimpleGrade>();
-	
-	
+	ArrayList<Grade> gradeList = new ArrayList<Grade>();
+	GradeStrategy currentStrategy;
+	Grade currentGrade;
+
+	public CompositeGrade() {
+		this.gradeList = new ArrayList<Grade>();
+
+	}
+
+	public void addGrade(Grade newGrade) {
+		this.gradeList.add(newGrade);
+
+	}
+
 	public double getValue() {
-		return 0;
+		this.currentGrade = this.currentStrategy.calculateGrade(this.gradeList);
+		return this.currentGrade.getValue();
+		
+
+	}
+
+	public void setStrategy(GradeStrategy chosenStrategy) {
+		this.currentStrategy = chosenStrategy;
 	}
 }

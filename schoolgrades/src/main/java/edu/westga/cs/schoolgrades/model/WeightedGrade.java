@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.model;
 
-public abstract class WeightedGrade implements Grade {
+public class WeightedGrade implements Grade {
 	private Grade currentGrade;
 
 	public WeightedGrade(Grade currentGrade) {
@@ -8,9 +8,9 @@ public abstract class WeightedGrade implements Grade {
 		this.applyWeight();
 	}
 
-	public void applyWeight() {
+	private void applyWeight() {
 		double value = this.currentGrade.getValue();
-		value = (10 * value) / (10);
+		value = (value * .05) + value;
 		SimpleGrade newGrade = new SimpleGrade(value);
 		this.currentGrade = newGrade;
 	}
