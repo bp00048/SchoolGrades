@@ -8,16 +8,15 @@ package edu.westga.cs.schoolgrades.model;
  *
  */
 public class SimpleGrade implements Grade {
-	private double grade;
+	private double gradeValue;
 
 	public SimpleGrade(double gradeValue) {
-		this.grade = gradeValue;
+		this.gradeValue = gradeValue;
 	}
 
 	@Override
 	public double getValue() {
-
-		return this.grade;
+		return this.gradeValue;
 	}
 
 }
