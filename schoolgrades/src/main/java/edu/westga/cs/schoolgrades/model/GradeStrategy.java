@@ -10,8 +10,8 @@ import java.util.ArrayList;
  *
  */
 public interface GradeStrategy {
-	
 
-public Grade calculateGrade(ArrayList<Grade> grades);
+	public Grade calculateGrade(ArrayList<Grade> grades);
 
+	public ArrayList<Grade> getGrades();
 }

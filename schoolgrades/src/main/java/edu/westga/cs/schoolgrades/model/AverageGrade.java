@@ -28,4 +28,8 @@ public class AverageGrade implements GradeStrategy {
 			return newGrade;
 		}
 	}
+
+	public ArrayList<Grade> getGrades() {
+		return this.gradeList;
+	}
 }
