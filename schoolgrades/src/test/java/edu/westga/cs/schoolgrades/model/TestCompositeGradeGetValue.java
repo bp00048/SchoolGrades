@@ -70,5 +70,90 @@ public class TestCompositeGradeGetValue {
 		assertEquals(this.testCompositeGrade.getValue(), 0);
 
 	}
+	
+	@Test
+	public void shouldSumWithOneWeightedGradeAndOneSimpleShouldBe127Point5() {
+		this.testCompositeGrade.setStrategy(new SumGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		this.testCompositeGrade.addGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 127.5);
+		
+	}
+	
+	@Test
+	public void shouldSumWithAllWeightedGradeShouldBe231() {
+		this.testCompositeGrade.setStrategy(new SumGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade1));
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade2));
+		assertEquals(this.testCompositeGrade.getValue(), 231);
+	}
 
+	@Test
+	public void shouldAverageWithAllWeightedGradeShouldBe77() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade1));
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade2));
+		assertEquals(this.testCompositeGrade.getValue(), 77);
+	}
+	
+	@Test
+	public void shouldAverageWithOneWeightedGradeAndOneSimpleShouldBe63Point75() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		this.testCompositeGrade.addGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 63.75);
+		
+	}
+	
+	@Test
+	public void shouldAverageAfterRemoveGradeBe50() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		this.testCompositeGrade.addGrade(testGrade);
+		this.testCompositeGrade.addGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 62.5);
+		
+		this.testCompositeGrade.removeGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 50);
+		
+	}
+	
+	@Test
+	public void shouldAverageAfterRemoveGradeBe52point5WithWeightedGrades() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		WeightedGrade newWeightGrade = new WeightedGrade(testGrade1);
+		this.testCompositeGrade.addGrade(newWeightGrade);
+		assertEquals(this.testCompositeGrade.getValue(), 65.63);
+		
+		this.testCompositeGrade.removeGrade(newWeightGrade);
+		assertEquals(this.testCompositeGrade.getValue(), 52.5);
+		
+	}
+	
+	@Test
+	public void shouldSumAfterRemoveGradeBe50() {
+		this.testCompositeGrade.setStrategy(new SumGrade());
+		this.testCompositeGrade.addGrade(testGrade);
+		this.testCompositeGrade.addGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 125);
+		
+		this.testCompositeGrade.removeGrade(testGrade1);
+		assertEquals(this.testCompositeGrade.getValue(), 50);
+		
+	}
+	
+	@Test
+	public void shouldSumAfterRemoveGradeBe52point5WithWeightedGrades() {
+		this.testCompositeGrade.setStrategy(new SumGrade());
+		this.testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		WeightedGrade newWeightGrade = new WeightedGrade(testGrade1);
+		this.testCompositeGrade.addGrade(newWeightGrade);
+		assertEquals(this.testCompositeGrade.getValue(), 131.25);
+		
+		this.testCompositeGrade.removeGrade(newWeightGrade);
+		assertEquals(this.testCompositeGrade.getValue(), 52.5);
+		
+	}
 }
