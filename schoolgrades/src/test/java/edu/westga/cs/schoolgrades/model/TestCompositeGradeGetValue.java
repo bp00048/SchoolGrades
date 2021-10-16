@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
  * @author windy
  *
  */
-class TestCompositeGradeGetValue {
+public class TestCompositeGradeGetValue {
 	Grade testGrade;
 	Grade testGrade1;
 	Grade testGrade2;
@@ -31,7 +31,7 @@ class TestCompositeGradeGetValue {
 	}
 
 	@Test
-	void shouldReturnTotalSum220() {
+	public void shouldReturnTotalSum220() {
 		this.testCompositeGrade.setStrategy(new SumGrade());
 		this.testCompositeGrade.addGrade(testGrade);
 		this.testCompositeGrade.addGrade(testGrade1);
@@ -41,7 +41,7 @@ class TestCompositeGradeGetValue {
 	}
 
 	@Test
-	void shouldChangeSumAsGradesAdded50Then125Then220() {
+	public void shouldChangeSumAsGradesAdded50Then125Then220() {
 		this.testCompositeGrade.setStrategy(new SumGrade());
 		this.testCompositeGrade.addGrade(testGrade);
 		assertEquals(this.testCompositeGrade.getValue(), 50);
@@ -49,6 +49,25 @@ class TestCompositeGradeGetValue {
 		assertEquals(this.testCompositeGrade.getValue(), 125);
 		this.testCompositeGrade.addGrade(testGrade2);
 		assertEquals(this.testCompositeGrade.getValue(), 220);
+
+	}
+
+	@Test
+	public void shouldAverageGradeAs73Point33() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		this.testCompositeGrade.addGrade(testGrade);
+		this.testCompositeGrade.addGrade(testGrade1);
+		this.testCompositeGrade.addGrade(testGrade2);
+		assertEquals(this.testCompositeGrade.getValue(), 73.33);
+
+	}
+
+	@Test
+	public void shouldAverageGradeFrom0To0() {
+		this.testCompositeGrade.setStrategy(new AverageGrade());
+		SimpleGrade testGradeOfZero = new SimpleGrade(0);
+		this.testCompositeGrade.addGrade(testGradeOfZero);
+		assertEquals(this.testCompositeGrade.getValue(), 0);
 
 	}
 

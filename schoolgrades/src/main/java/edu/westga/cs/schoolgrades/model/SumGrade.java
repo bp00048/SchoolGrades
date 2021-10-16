@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  */
 public class SumGrade implements GradeStrategy {
-	ArrayList<Grade> gradeList = new ArrayList<Grade>();
+	ArrayList<Grade> gradeList;
 
 	@Override
 	public Grade calculateGrade(ArrayList<Grade> grades) {

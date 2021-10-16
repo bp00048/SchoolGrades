@@ -59,4 +59,14 @@ Grade testGrade2;
 
 	}
 
+	@Test
+	public void shouldApplyWeightToCompositeGradeAverageWithAllGradesWeightedShouldBe74Point9() {
+		CompositeGrade testCompositeGrade = new CompositeGrade();
+		testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		testCompositeGrade.addGrade(new WeightedGrade(testGrade1));
+		testCompositeGrade.addGrade(new WeightedGrade(testGrade2));
+		testCompositeGrade.setStrategy(new AverageGrade());
+		assertEquals(testCompositeGrade.getValue(),74.9);
+
+	}
 }

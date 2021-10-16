@@ -20,6 +20,12 @@ public class CompositeGrade implements Grade {
 		this.gradeList.add(newGrade);
 
 	}
+	
+	
+	public void removeGrade(Grade newGrade) {
+		this.gradeList.remove(newGrade);
+
+	}
 
 	public double getValue() {
 		this.currentGrade = this.currentStrategy.calculateGrade(this.gradeList);
