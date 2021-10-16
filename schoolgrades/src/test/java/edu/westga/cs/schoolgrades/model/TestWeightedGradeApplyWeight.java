@@ -12,10 +12,11 @@ import org.junit.jupiter.api.Test;
  * @author windy
  *
  */
-class TestWeightedGradeApplyWeight {	
-Grade testGrade;
-Grade testGrade1;
-Grade testGrade2;
+class TestWeightedGradeApplyWeight {
+	Grade testGrade;
+	Grade testGrade1;
+	Grade testGrade2;
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -31,23 +32,23 @@ Grade testGrade2;
 		WeightedGrade testWeightedGrade = new WeightedGrade(testGrade);
 		assertEquals(testWeightedGrade.getValue(), 84);
 	}
-	
+
 	@Test
 	public void shouldNotChangeSimpleGrade() {
 		WeightedGrade testWeightedGrade = new WeightedGrade(testGrade);
 		assertEquals(testWeightedGrade.getValue(), 84);
 		assertEquals(this.testGrade.getValue(), 80);
 	}
-	
+
 	@Test
 	public void shouldApplyWeightToCompositeGradeToSingleGradeSumAndReturn84() {
 		CompositeGrade testCompositeGrade = new CompositeGrade();
 		testCompositeGrade.addGrade(new WeightedGrade(testGrade));
 		testCompositeGrade.setStrategy(new SumGrade());
-		assertEquals(testCompositeGrade.getValue(),84);
+		assertEquals(testCompositeGrade.getValue(), 84);
 
 	}
-	
+
 	@Test
 	public void shouldApplyWeightToCompositeGradeToThreeGradesSumAndReturn224Point7() {
 		CompositeGrade testCompositeGrade = new CompositeGrade();
@@ -55,7 +56,7 @@ Grade testGrade2;
 		testCompositeGrade.addGrade(new WeightedGrade(testGrade1));
 		testCompositeGrade.addGrade(new WeightedGrade(testGrade2));
 		testCompositeGrade.setStrategy(new SumGrade());
-		assertEquals(testCompositeGrade.getValue(),224.7);
+		assertEquals(testCompositeGrade.getValue(), 224.7);
 
 	}
 
@@ -66,7 +67,18 @@ Grade testGrade2;
 		testCompositeGrade.addGrade(new WeightedGrade(testGrade1));
 		testCompositeGrade.addGrade(new WeightedGrade(testGrade2));
 		testCompositeGrade.setStrategy(new AverageGrade());
-		assertEquals(testCompositeGrade.getValue(),74.9);
+		assertEquals(testCompositeGrade.getValue(), 74.9);
+
+	}
+
+	@Test
+	public void shouldApplyWeightToCompositeGradeAverageWithOneGradeWeightedShouldBe72Point67() {
+		CompositeGrade testCompositeGrade = new CompositeGrade();
+		testCompositeGrade.addGrade(new WeightedGrade(testGrade));
+		testCompositeGrade.addGrade(testGrade1);
+		testCompositeGrade.addGrade(testGrade2);
+		testCompositeGrade.setStrategy(new AverageGrade());
+		assertEquals(testCompositeGrade.getValue(), 72.67);
 
 	}
 }

@@ -1,22 +1,18 @@
 package edu.westga.cs.schoolgrades.model;
 
-public class WeightedGrade implements Grade {
-	private Grade currentGrade;
+public class WeightedGrade extends GradeDecorator {
 
-	public WeightedGrade(Grade currentGrade) {
-		this.currentGrade = currentGrade;
-		this.applyWeight();
+	
+	public WeightedGrade(Grade next) {
+		super(next);
 	}
 
-	private void applyWeight() {
-		double value = this.currentGrade.getValue();
-		value = (value * .05) + value;
-		SimpleGrade newGrade = new SimpleGrade(value);
-		this.currentGrade = newGrade;
+	private double applyWeight() {
+		return (super.getValue() + 0.5);
 	}
 
 	@Override
 	public double getValue() {
-		return this.currentGrade.getValue();
+		return super.getValue() + this.applyWeight();
 	}
 }
