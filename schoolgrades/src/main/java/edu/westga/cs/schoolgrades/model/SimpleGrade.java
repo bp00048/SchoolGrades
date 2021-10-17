@@ -1,10 +1,10 @@
-/**
- * 
- */
 package edu.westga.cs.schoolgrades.model;
 
 /**
- * @author windy
+ * A Grade object that holds a double value and can return that value.
+ * 
+ * @author Blair Pattison
+ * @version 10/16/2021
  *
  */
 public class SimpleGrade implements Grade {

@@ -6,22 +6,29 @@ package edu.westga.cs.schoolgrades.model;
 import java.util.ArrayList;
 
 /**
- * @author windy
- *
+ * This class extends GradeStrategyDecorator and therefore forwards its
+ * calculations to the GradeStrategy. It drops the lowest grade in the sequences
+ * and forwards the list to the strategy.
+ * 
+ * @author Blair Pattison
+ * @version 10/16/2021
+ * 
  */
+
 public class DroppedGrade extends GradeStrategyDecorator {
-	private GradeStrategy next;
 	private ArrayList<Grade> gradeList;
 
 	public DroppedGrade(GradeStrategy next) {
 		super(next);
-		this.next = next;
 
 	}
 
+	/**
+	 * Finds the lowest Grade in the list and removes it.
+	 */
 	private void dropLowestGrade() {
-		Grade smallestGrade = this.next.getGrades().get(0);
-		for (Grade current : this.next.getGrades()) {
+		Grade smallestGrade = this.gradeList.get(0);
+		for (Grade current : this.gradeList) {
 			if (current.getValue() < smallestGrade.getValue()) {
 				smallestGrade = current;
 			}
@@ -29,9 +36,16 @@ public class DroppedGrade extends GradeStrategyDecorator {
 		this.gradeList.remove(smallestGrade);
 	}
 
+	/**
+	 * After dropping the lowest Grade, the list is forwarded to the super's
+	 * (GradeStrategy)'s calculateGrade method.
+	 */
 	@Override
-	public ArrayList<Grade> getGrades() {
+	public Grade calculateGrade(ArrayList<Grade> grades) {
+		this.gradeList = grades;
 		this.dropLowestGrade();
-		return this.gradeList;
+		return super.calculateGrade(this.gradeList);
+
 	}
+
 }
