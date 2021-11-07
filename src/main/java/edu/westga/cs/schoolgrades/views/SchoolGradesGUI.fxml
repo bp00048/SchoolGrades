@@ -36,7 +36,7 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutY="247.0" prefHeight="36.0" prefWidth="500.0" spacing="10.0">
+            <HBox alignment="CENTER" layoutY="258.0" prefHeight="36.0" prefWidth="500.0" spacing="10.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="145.0">
                      <children>
@@ -67,21 +67,21 @@
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutY="283.0" prefHeight="53.0" prefWidth="500.0" spacing="10.0">
+            <HBox alignment="CENTER" layoutY="294.0" prefHeight="30.0" prefWidth="500.0" spacing="10.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="145.0">
                      <children>
-                        <TextArea fx:id="quizSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="quizSubtotal" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="49.0" prefWidth="145.0">
                      <children>
-                        <TextArea fx:id="hwSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="hwSubtotal" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="145.0">
                      <children>
-                        <TextArea fx:id="examSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                        <TextArea fx:id="examSubtotal" prefHeight="100.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                </children>
