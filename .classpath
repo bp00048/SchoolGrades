@@ -25,7 +25,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-17.0.1/lib/javafx.base.jar"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-17.0.1/lib/javafx.controls.jar"/>
 	<classpathentry kind="var" path="ECLIPSE_HOME/javafx-sdk-17.0.1/lib/javafx.fxml.jar"/>

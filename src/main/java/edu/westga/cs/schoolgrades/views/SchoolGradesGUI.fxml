@@ -1,8 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
+<AnchorPane prefHeight="411.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="411.0" prefWidth="500.0">
+         <children>
+            <HBox alignment="CENTER" layoutY="72.0" prefHeight="175.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="229.0" prefWidth="145.0">
+                     <children>
+                        <ListView id="quizzesList" fx:id="quizzesList" prefHeight="175.0" prefWidth="85.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="229.0" prefWidth="145.0">
+                     <children>
+                        <ListView id="hwList" fx:id="hwList" prefHeight="175.0" prefWidth="115.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="229.0" prefWidth="145.0">
+                     <children>
+                        <ListView fx:id="examsList" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="247.0" prefHeight="36.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz Subtotal">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="HW Subtotal">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exam Subtotal">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="283.0" prefHeight="53.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <TextArea fx:id="quizSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="49.0" prefWidth="145.0">
+                     <children>
+                        <TextArea fx:id="hwSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <TextArea fx:id="examSubtotal" prefHeight="200.0" prefWidth="200.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="348.0" prefHeight="53.0" prefWidth="500.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="53.0" prefWidth="107.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Final Grade:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="46.0" prefWidth="167.0">
+                     <children>
+                        <TextArea fx:id="finalGradeSubtotal" prefHeight="53.0" prefWidth="234.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="53.0" prefWidth="132.0">
+                     <children>
+                        <Button fx:id="calculateGradeButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="161.0" text="Calculate Grade" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutY="43.0" prefHeight="29.0" prefWidth="500.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Quizzes">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="46.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Homeworks">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="145.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Exams">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutY="4.0" prefHeight="36.0" prefWidth="500.0">
+               <children>
+                  <MenuButton fx:id="dataMenuButton" alignment="TOP_LEFT" mnemonicParsing="false" text="Data">
+                    <items>
+                      <MenuItem fx:id="addQuizGrade" mnemonicParsing="false" text="Add Quiz Grade" />
+                      <MenuItem fx:id="addHwGrade" mnemonicParsing="false" text="Add Homework Grade" />
+                        <MenuItem fx:id="addExamGrade" mnemonicParsing="false" text="Add Exam Grade" />
+                    </items>
+                  </MenuButton>
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>
-
