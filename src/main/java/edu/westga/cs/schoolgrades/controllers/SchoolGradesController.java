@@ -24,6 +24,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.cell.TextFieldListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.util.StringConverter;
@@ -42,6 +43,13 @@ public class SchoolGradesController implements Initializable {
 	private ListView<SimpleGrade> hwList;
 	@FXML
 	private ListView<SimpleGrade> quizzesList;
+
+	@FXML
+	private ContextMenu quizContextMenu;
+	@FXML
+	private ContextMenu examContextMenu;
+	@FXML
+	private ContextMenu hwContextMenu;
 
 	private ObservableList<SimpleGrade> hwGradesList;
 	private ObservableList<SimpleGrade> quizGradesList;
@@ -86,6 +94,8 @@ public class SchoolGradesController implements Initializable {
 		this.finalGradeSubtotal = new TextArea();
 		this.examSubtotal = new TextArea();
 		this.hwSubtotal = new TextArea();
+		
+		this.examContextMenu = new ContextMenu();
 
 	}
 
@@ -94,15 +104,17 @@ public class SchoolGradesController implements Initializable {
 		this.hwGradesList = FXCollections.observableArrayList();
 		this.examGradesList = FXCollections.observableArrayList();
 		this.quizGradesList = FXCollections.observableArrayList();
-
+		
 		this.quizGrades = new CompositeGrade(new SumOfGradesStrategy());
 		this.homeworkGrades = new CompositeGrade(new DropLowestStrategy(new AverageOfGradesStrategy()));
 		this.examGrades = new CompositeGrade(new AverageOfGradesStrategy());
 
-		this.buildListView(this.quizzesList, this.quizGradesList, this.addQuizGrade);
-		this.buildListView(this.examsList, this.examGradesList, this.addExamGrade);
-		this.buildListView(this.hwList, this.hwGradesList, this.addHwGrade);
-
+		this.buildListView(this.quizzesList, this.quizGradesList, this.addQuizGrade, this.quizContextMenu);
+		this.buildListView(this.examsList, this.examGradesList, this.addExamGrade, this.examContextMenu);
+		this.buildListView(this.hwList, this.hwGradesList, this.addHwGrade, this.hwContextMenu);
+		
+		
+		
 		this.calculateGradeButton.setOnMousePressed(new CalculateGrade());
 
 	}
@@ -110,7 +122,8 @@ public class SchoolGradesController implements Initializable {
 	/**
 	 * Displays the list view for the quizzes.
 	 */
-	private void buildListView(ListView<SimpleGrade> list, ObservableList<SimpleGrade> grades, MenuItem menu) {
+	private void buildListView(ListView<SimpleGrade> list, ObservableList<SimpleGrade> grades, MenuItem menu,
+			ContextMenu contextMenu) {
 		list.setItems(grades);
 		list.setEditable(true);
 		list.setCellFactory(lv -> {
@@ -119,6 +132,10 @@ public class SchoolGradesController implements Initializable {
 			return cell;
 		});
 		menu.setOnAction(event -> {
+			grades.add(new SimpleGrade(0));
+		});
+
+		contextMenu.setOnAction(event -> {
 			grades.add(new SimpleGrade(0));
 		});
 	}
