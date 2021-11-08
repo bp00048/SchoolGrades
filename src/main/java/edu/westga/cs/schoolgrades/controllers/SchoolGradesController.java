@@ -206,6 +206,7 @@ public class SchoolGradesController implements Initializable {
 			subtotal.setText("0.0");
 		} else {
 			subtotal.setText(String.valueOf(grade.getValue()));
+			subtotal.setAccessibleText(String.valueOf(grade.getValue()));
 		}
 	}
 
