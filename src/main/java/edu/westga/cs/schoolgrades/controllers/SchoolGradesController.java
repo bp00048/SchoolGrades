@@ -177,40 +177,36 @@ public class SchoolGradesController implements Initializable {
 			examGrades = new CompositeGrade(new AverageOfGradesStrategy());
 			examGrades.addAll(examGradesList);
 			
-			String finalGrade;
-			if (quizGrades == null || homeworkGrades == null || examGrades == null) {
-				finalGrade = "0";
-			} else {
-				WeightedGrade finalGrade1 = new WeightedGrade(quizGrades, 0.2);
-				WeightedGrade finalGrade2 = new WeightedGrade(homeworkGrades, 0.3);
-				WeightedGrade finalGrade3 = new WeightedGrade(examGrades, 0.5);
-				finalGrade = String.valueOf(finalGrade1.getValue() + finalGrade2.getValue() + finalGrade3.getValue());
-			}
-			if (quizGrades == null) {
-				quizSubtotal.setText("0");
-			} else {
-				quizSubtotal.setText(String.valueOf(quizGrades.getValue()));
-			}
-
-			if (homeworkGrades == null) {
-				hwSubtotal.setText("0");
-			} else {
-				hwSubtotal.setText(String.valueOf(homeworkGrades.getValue()));
-			}
-
-			if (examGrades == null) {
-				examSubtotal.setText("0");
-			} else {
-				examSubtotal.setText(String.valueOf(examGrades.getValue()));
-			}
-
-			if (examGrades == null) {
-				examSubtotal.setText("0");
-			} else {
-				examSubtotal.setText(String.valueOf(examGrades.getValue()));
-			}
-			finalGradeSubtotal.setText(finalGrade);
+			subtotalCalculator(quizGrades, quizSubtotal);
+			subtotalCalculator(homeworkGrades, hwSubtotal);
+			subtotalCalculator(examGrades, examSubtotal);
+			
+			finalGradeCalculator();
 		}
 
 	}
+	
+	private void subtotalCalculator(CompositeGrade grade, TextArea subtotal) {
+		if (grade == null) {
+			subtotal.setText("0");
+		} else {
+			subtotal.setText(String.valueOf(grade.getValue()));
+		}
+		
+	}
+	
+	private void finalGradeCalculator() {		
+		String finalGrade;
+		if (quizGrades == null || homeworkGrades == null || examGrades == null) {
+			finalGrade = "0";
+		} else {
+			WeightedGrade finalGrade1 = new WeightedGrade(quizGrades, 0.2);
+			WeightedGrade finalGrade2 = new WeightedGrade(homeworkGrades, 0.3);
+			WeightedGrade finalGrade3 = new WeightedGrade(examGrades, 0.5);
+			finalGrade = String.valueOf(finalGrade1.getValue() + finalGrade2.getValue() + finalGrade3.getValue());
+		}
+		
+		finalGradeSubtotal.setText(finalGrade);
+	}
+
 }
