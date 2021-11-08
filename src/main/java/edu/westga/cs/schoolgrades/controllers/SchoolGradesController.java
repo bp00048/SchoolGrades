@@ -4,10 +4,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import edu.westga.cs.schoolgrades.model.AverageOfGradesStrategy;
 import edu.westga.cs.schoolgrades.model.CompositeGrade;
+import edu.westga.cs.schoolgrades.model.DropLowestStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumOfGradesStrategy;
+import edu.westga.cs.schoolgrades.model.WeightedGrade;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
@@ -56,10 +59,19 @@ public class SchoolGradesController implements Initializable {
 	private MenuItem addExamGrade;
 
 	@FXML
+	private TextArea finalGradeSubtotal;
+	@FXML
 	private TextArea quizSubtotal;
 	@FXML
+	private TextArea examSubtotal;
+	@FXML
+	private TextArea hwSubtotal;
+	@FXML
 	private Button calculateGradeButton;
+
 	private CompositeGrade quizGrades;
+	private CompositeGrade homeworkGrades;
+	private CompositeGrade examGrades;
 
 	public void SchoolGradesControlleR() {
 		this.dataMenuButton = new MenuButton();
@@ -71,7 +83,7 @@ public class SchoolGradesController implements Initializable {
 		this.addExamGrade = new MenuItem();
 		this.addHwGrade = new MenuItem();
 		this.quizSubtotal = new TextArea();
-
+		this.finalGradeSubtotal = new TextArea();
 
 	}
 
@@ -81,12 +93,13 @@ public class SchoolGradesController implements Initializable {
 		this.examGradesList = FXCollections.observableArrayList();
 		this.quizGradesList = FXCollections.observableArrayList();
 		this.quizGrades = new CompositeGrade(new SumOfGradesStrategy());
+		this.homeworkGrades = new CompositeGrade(new DropLowestStrategy(new AverageOfGradesStrategy()));
+		this.examGrades = new CompositeGrade(new AverageOfGradesStrategy());
 
 		this.buildQuizList();
 		this.buildExamList();
 		this.buildHwList();
 		this.calculateGradeButton.setOnMousePressed(new CalculateGrade());
-		
 
 	}
 
@@ -157,12 +170,46 @@ public class SchoolGradesController implements Initializable {
 		public void handle(MouseEvent me) {
 			quizGrades = new CompositeGrade(new SumOfGradesStrategy());
 			quizGrades.addAll(quizGradesList);
+
+			homeworkGrades = new CompositeGrade(new DropLowestStrategy(new AverageOfGradesStrategy()));
+			homeworkGrades.addAll(hwGradesList);
+
+			examGrades = new CompositeGrade(new AverageOfGradesStrategy());
+			examGrades.addAll(examGradesList);
+			
+			String finalGrade;
+			if (quizGrades == null || homeworkGrades == null || examGrades == null) {
+				finalGrade = "0";
+			} else {
+				WeightedGrade finalGrade1 = new WeightedGrade(quizGrades, 0.2);
+				WeightedGrade finalGrade2 = new WeightedGrade(homeworkGrades, 0.3);
+				WeightedGrade finalGrade3 = new WeightedGrade(examGrades, 0.5);
+				finalGrade = String.valueOf(finalGrade1.getValue() + finalGrade2.getValue() + finalGrade3.getValue());
+			}
 			if (quizGrades == null) {
 				quizSubtotal.setText("0");
 			} else {
-				
 				quizSubtotal.setText(String.valueOf(quizGrades.getValue()));
 			}
+
+			if (homeworkGrades == null) {
+				hwSubtotal.setText("0");
+			} else {
+				hwSubtotal.setText(String.valueOf(homeworkGrades.getValue()));
+			}
+
+			if (examGrades == null) {
+				examSubtotal.setText("0");
+			} else {
+				examSubtotal.setText(String.valueOf(examGrades.getValue()));
+			}
+
+			if (examGrades == null) {
+				examSubtotal.setText("0");
+			} else {
+				examSubtotal.setText(String.valueOf(examGrades.getValue()));
+			}
+			finalGradeSubtotal.setText(finalGrade);
 		}
 
 	}
