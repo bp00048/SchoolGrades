@@ -1,5 +1,5 @@
 package edu.westga.cs.schoolgrades.model;
-
+import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,11 +8,13 @@ public class TestWeightedGradeGetValue {
 
 	private static final double DELTA = 0.001;
 	private WeightedGrade weightedGrade;
-	private SimpleGrade simpleGrade;
+	private mockGrade simpleGrade;
 	
 	@BeforeEach
 	public void setup() {
-		simpleGrade = new SimpleGrade(100);
+		simpleGrade = new mockGrade(Grade.class);
+		when(mockGrade.getValue()).thenReturn(100.00);
+		
 	}
 	
 	@Test
