@@ -6,15 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestSumOfGradesStrategyCalculate {
 
 	private static final double DELTA = 0.001;
-	private Grade grade0;
-	private Grade grade1;
-	private Grade grade2;
+	private Grade mockGrade0;
+	private Grade mockGrade1;
+	private Grade mockGrade2;
 	
 	private List<Grade> grades;
 	
@@ -22,9 +25,12 @@ public class TestSumOfGradesStrategyCalculate {
 	
 	@BeforeEach
 	public void setup() {
-		grade0 = new SimpleGrade(10);
-		grade1 = new SimpleGrade(20);
-		grade2 = new SimpleGrade(30);
+		mockGrade0 = mock(Grade.class);
+		mockGrade1 = mock(Grade.class);
+		mockGrade2 = mock(Grade.class);
+		when(mockGrade0.getValue()).thenReturn(10.00);
+		when(mockGrade1.getValue()).thenReturn(20.00);
+		when(mockGrade2.getValue()).thenReturn(30.00);
 		
 		grades = new ArrayList<Grade>();
 		
@@ -45,15 +51,15 @@ public class TestSumOfGradesStrategyCalculate {
 	
 	@Test
 	public void shouldCalculateSumOfOneGrades() {
-		grades.add(grade0);
-		assertEquals(grade0.getValue(), strategy.calculate(grades), DELTA);
+		grades.add(mockGrade0);
+		assertEquals(mockGrade0.getValue(), strategy.calculate(grades), DELTA);
 	}
 
 	@Test
 	public void shouldCalculateSumOManyGrades() {
-		grades.add(grade0);
-		grades.add(grade1);
-		grades.add(grade2);
+		grades.add(mockGrade0);
+		grades.add(mockGrade1);
+		grades.add(mockGrade2);
 		assertEquals(60, strategy.calculate(grades), DELTA);
 	}
 }
