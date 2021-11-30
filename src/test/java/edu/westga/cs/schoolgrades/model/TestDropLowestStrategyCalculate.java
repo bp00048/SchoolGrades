@@ -2,25 +2,26 @@ package edu.westga.cs.schoolgrades.model;
 
 
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TestDropLowestStrategyCalculate {
 
-	private DropLowestStrategy dropLowestStrategy;
-	private GradeCalculationStrategy mockChildStrategy;
 	
 	private static final double DELTA = 0.001;
 	private Grade mockGrade0;
 	private Grade mockGrade1;
 	private Grade mockGrade2;
+	private GradeCalculationStrategy mockStrategy;
+	private DropLowestStrategy dropLowest;
 	
 	private List<Grade> mockGrades;
 	
@@ -35,25 +36,31 @@ public class TestDropLowestStrategyCalculate {
 		
 		mockGrades = new ArrayList<Grade>();
 		
-		mockChildStrategy = mock(GradeCalculationStrategy.class);
-		dropLowestStrategy =  mock(DropLowestStrategy.class);
+		mockStrategy = mock(GradeCalculationStrategy.class);
+		dropLowest = new DropLowestStrategy(mockStrategy);
+		
 	}
 
 	@Test
-	public void shouldNotAllowNullmockGradesList() {
+	public void shouldNotAllowNullGradesList() {
 		assertThrows(IllegalArgumentException.class, () ->{ 
-			dropLowestStrategy.calculate(null);
+			new DropLowestStrategy(null);
 		});
 	}
 
 	@Test
 	public void shouldNotDropLowestIfmockGradesListIsEmpty() {
-		assertEquals(0, dropLowestStrategy.calculate(mockGrades), DELTA);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		verify(mockStrategy).calculate(testList);
 	}
 	
 	public void shouldNotDropLowestIfmockGradesListHasOneElement() {
 		mockGrades.add(mockGrade0);
-		assertEquals(mockGrade0.getValue(), dropLowestStrategy.calculate(mockGrades), DELTA);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		testList.add(mockGrade0);
+		verify(mockStrategy).calculate(testList);
 	}
 	
 	@Test
@@ -61,8 +68,11 @@ public class TestDropLowestStrategyCalculate {
 		mockGrades.add(mockGrade0);
 		mockGrades.add(mockGrade1);
 		mockGrades.add(mockGrade2);
-		dropLowestStrategy.calculate(mockGrades);
-		verify(dropLowestStrategy).calculate(mockGrades);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		testList.add(mockGrade1);
+		testList.add(mockGrade2);
+		verify(mockStrategy).calculate(testList);
 		
 	}
 	
@@ -72,8 +82,11 @@ public class TestDropLowestStrategyCalculate {
 		mockGrades.add(mockGrade1);
 		mockGrades.add(mockGrade2);
 		mockGrades.add(mockGrade0);
-		dropLowestStrategy.calculate(mockGrades);
-		verify(dropLowestStrategy).calculate(mockGrades);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		testList.add(mockGrade1);
+		testList.add(mockGrade2);
+		verify(mockStrategy).calculate(testList);
 	}
 	
 	@Test
@@ -81,8 +94,11 @@ public class TestDropLowestStrategyCalculate {
 		mockGrades.add(mockGrade1);
 		mockGrades.add(mockGrade0);
 		mockGrades.add(mockGrade2);
-		dropLowestStrategy.calculate(mockGrades);
-		verify(dropLowestStrategy).calculate(mockGrades);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		testList.add(mockGrade1);
+		testList.add(mockGrade2);
+		verify(mockStrategy).calculate(testList);
 	}
 	
 	@Test
@@ -91,7 +107,11 @@ public class TestDropLowestStrategyCalculate {
 		mockGrades.add(mockGrade0);
 		mockGrades.add(mockGrade2);
 		mockGrades.add(mockGrade0);
-		dropLowestStrategy.calculate(mockGrades);
-		verify(dropLowestStrategy).calculate(mockGrades);
+		dropLowest.calculate(mockGrades);
+		List<Grade> testList = new ArrayList<>();
+		testList.add(mockGrade1);
+		testList.add(mockGrade2);
+		testList.add(mockGrade0);
+		verify(mockStrategy).calculate(testList);
 	}
 }
